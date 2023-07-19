@@ -7,11 +7,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import tkinter.messagebox
-
 import urllib.request
 import urllib.parse
 
-movieData = ' [' \
+moviedata = ' [' \
             '{"title":"纪录片", "type":"1", "interval_id":"100:90"}, ' \
             ' {"title":"传记", "type":"2", "interval_id":"100:90"}, ' \
             ' {"title":"犯罪", "type":"3", "interval_id":"100:90"}, ' \
@@ -62,32 +61,28 @@ def get_url_data_in_ranking_list(typeId, movie_count, rating, vote_count):
         req = urllib.request.Request(url=url, headers=headers)
         f = urllib.request.urlopen(req, context=context)
         response = f.read()
-        jsonData = loads(response)  # 将json转为python对象
+        jsondata = loads(response)  # 将json转为python对象
 
         res_list = []
-        for subData in jsonData:  # 依次对每部电影进行操作
-            if (float(subData['rating'][0]) >= float(rating)) and (float(subData['vote_count']) >= float(vote_count)):
+        for subdata in jsondata:  # 依次对每部电影进行操作
+            if (float(subdata['rating'][0]) >= float(rating)) and (float(subdata['vote_count']) >= float(vote_count)):
                 sub_list= []
-                sub_list.append(subData['title'])
-                sub_list.append(subData['rating'][0])
-                sub_list.append(subData['rank'])
-                sub_list.append(subData['vote_count'])
+                sub_list.append(subdata['title'])
+                sub_list.append(subdata['rating'][0])
+                sub_list.append(subdata['rank'])
+                sub_list.append(subdata['vote_count'])
                 res_list.append(sub_list)
 
         for data in res_list:
             print(data)
 
-        return [res_list, jsonData]
+        return [res_list, jsondata]
 
     except Exception as ex:
         err_str = "出现未知异常：{}".format(ex)
         return [err_str]
 
-
-
-
-
-def get_url_data_in_keyWord(key_word):
+def get_url_data_in_keyword(key_word):
     """
     从关键字获取电影数据
     :param key_word:
@@ -127,54 +122,54 @@ def get_url_data_in_keyWord(key_word):
             wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '.root')))
 
             dr = browser.find_elements(by=By.XPATH, value="//div[@class='item-root']") # 获取class为item-root的DIV(因为有多个结果)
-            jsonData = []
+            jsondata = []
             res_list = []
             for son in dr:
-                movieData = {'rating': ['', 'null'], 'cover_url': '', 'types': '', 'title': '', 'url': '', 'release_date': '', 'vote_count': '', 'actors': ''}
+                moviedata = {'rating': ['', 'null'], 'cover_url': '', 'types': '', 'title': '', 'url': '', 'release_date': '', 'vote_count': '', 'actors': ''}
                 sub_list = ['', '', '', '']
 
                 url_element = son.find_elements(by=By.XPATH, value=".//a")  # 获取第一个a标签的url(因为有多个结果)
                 if url_element:
-                    movieData['url'] = (url_element[0].get_attribute("href"))
+                    moviedata['url'] = (url_element[0].get_attribute("href"))
 
                 img_url_element = url_element[0].find_elements(by=By.XPATH, value=".//img")  # 获取影片海报图片地址
                 if img_url_element:
-                    movieData['cover_url'] = (img_url_element[0].get_attribute("src"))
+                    moviedata['cover_url'] = (img_url_element[0].get_attribute("src"))
 
                 title_element = son.find_elements(by=By.XPATH, value=".//div[@class='title']")  # 获取标题
                 if title_element:
                     temp_title = title_element[0].text
-                    movieData['title'] = (temp_title.split('('))[0]
-                    movieData['release_date'] = temp_title[temp_title.find('(') + 1:temp_title.find(')')]
-                    sub_list[0] = movieData['title']
+                    moviedata['title'] = (temp_title.split('('))[0]
+                    moviedata['release_date'] = temp_title[temp_title.find('(') + 1:temp_title.find(')')]
+                    sub_list[0] = moviedata['title']
 
                 rating_element = son.find_elements(by=By.XPATH, value=".//span[@class='rating_nums']")  # 获取评分
                 if rating_element:
-                    movieData['rating'][0] = rating_element[0].text
-                    sub_list[1] = movieData['rating'][0]
+                    moviedata['rating'][0] = rating_element[0].text
+                    sub_list[1] = moviedata['rating'][0]
 
                 vote_element = son.find_elements(by=By.XPATH, value=".//span[@class='pl']")  # 获取数量
                 if vote_element:
-                    movieData['vote_count'] = vote_element[0].text.replace('(', '').replace(')', '').replace('人评价', '')
-                    sub_list[3] = movieData['vote_count']
+                    moviedata['vote_count'] = vote_element[0].text.replace('(', '').replace(')', '').replace('人评价', '')
+                    sub_list[3] = moviedata['vote_count']
 
                 type_element = son.find_elements(by=By.XPATH, value=".//div[@class='meta abstract']")  # 获取类型
                 if type_element:
-                    movieData['types'] = type_element[0].text
-                    sub_list[2] = movieData['types']
+                    moviedata['types'] = type_element[0].text
+                    sub_list[2] = moviedata['types']
 
                 actors_element = son.find_elements(by=By.XPATH, value=".//div[@class='meta abstract_2']")  # 获取演员
                 if actors_element:
-                    movieData['actors'] = actors_element[0].text
+                    moviedata['actors'] = actors_element[0].text
 
-                jsonData.append(movieData)
+                jsondata.append(moviedata)
                 res_list.append(sub_list)
 
             for data in res_list:
                 print(data)
 
             browser.quit()
-            return [res_list, jsonData]
+            return [res_list, jsondata]
 
         except Exception as ex:
             browser.quit()  # 关闭浏览器
