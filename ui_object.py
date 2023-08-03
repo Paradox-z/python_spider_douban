@@ -193,9 +193,6 @@ class ui_object:
 
         self.b_0_imdb['state'] = NORMAL
 
-    def project_statement_show(self, event):
-        open("https://github.com/shengqiangzhang/examples-of-web-crawlers")
-
     def project_statement_get_focus(self, event):
         self.project_statement.config(fg="blue", cursor="hand1")
 
