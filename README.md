@@ -1,5 +1,5 @@
 # python_spider_douban
-#Background: Python spider technology can be used to automatically collect data. This project is based on tools and third-party libraries to achieve keyword search, ranking selection, and other functions for Douban movie data.
+#Project background: Python spider technology can be used to automatically collect data. This project is based on tools and third-party libraries to achieve keyword search, ranking selection, and other functions for Douban movie data.
 #Project content: Design a program framework and implement the following functions:
 --Initialize the UI framework and load the interface elements.
 --Construct requests based on keywords and parse the returned data.
