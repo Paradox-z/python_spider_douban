@@ -13,9 +13,10 @@ Design a program framework and implement the following functions:
 **-3-**A multimodal interface is implemented, displaying text and images, and clicking a button can view movie details and resource URLs.
 
 
-## 环境准备：Python编译器，PyCharm社区版，pip.ini镜像文件，chrome和chromedriver，selenium工具，Python第三方库
+## 环境准备
+Python编译器，PyCharm社区版，pip.ini镜像文件，chrome和chromedriver，selenium工具，Python第三方库
 
-## 项目复现：
+## 项目复现
 
 ### 1. 确定chrome版本，安装对应版本的chromedriver
 
