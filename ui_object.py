@@ -35,42 +35,41 @@ ssl._create_default_https_context = ssl._create_unverified_context #关闭SSL证
 
 def thread_it(func, *args):
     '''
-    将函数打包进线程
+    Packing functions into threads
     '''
-    # 创建
+    # create
     t = Thread(target=func, args=args)
-    # 守护
+    # daemon
     t.setDaemon(True)
-    # 启动
+    # start
     t.start()
 
 def handler_adaptor(fun, **kwds):
-    '''事件处理函数的适配器，相当于中介'''
+    '''Adapters for event handling Functions'''
     return lambda event, fun=fun, kwds=kwds: fun(event, **kwds)
 
 def save_img(img_url, file_name, file_path):
     """
-    下载指定url的图片，并保存运行目录下的img文件夹
-    :param img_url: 图片地址
-    :param file_name: 图片名字
-    :param file_path: 存储目录
+    :param img_url:
+    :param file_name:
+    :param file_path:
     :return:
     """
-    #保存图片到磁盘文件夹 file_path中，默认为当前脚本运行目录下的img文件夹
+    #default path
     try:
-        #判断文件夹是否已经存在
+        # Determining whether a folder already exists
         if not os.path.exists(file_path):
             print('文件夹',file_path,'不存在，重新建立')
             os.makedirs(file_path)
-        #获得图片后缀
+        # Get file suffix
         file_suffix = os.path.splitext(img_url)[1]
-        #拼接图片名（包含路径）
+        # Splice image name, include path
         filename = '{}{}{}{}'.format(file_path,os.sep,file_name,file_suffix)
 
-        #判断文件是否已经存在
+        # Determining whether a folder already exists
         if not os.path.exists(filename):
             print('文件', filename, '不存在，重新建立')
-            # 下载图片，并保存到文件夹中
+            # Download and save images
             urllib.request.urlretrieve(img_url, filename=filename)
         return filename
 
@@ -81,9 +80,9 @@ def save_img(img_url, file_name, file_path):
 
 def resize(w_box, h_box, pil_image):
     """
-    等比例缩放图片,并且限制在指定方框内
-    :param w_box,h_box: 指定方框的宽度和高度
-    :param pil_image: 原始图片
+    Scale the image proportionally and limit it to the specified box.
+    :param w_box,h_box: specified box
+    :param pil_image: original image
     :return:
     """
 
@@ -97,14 +96,14 @@ def resize(w_box, h_box, pil_image):
     return pil_image.resize((width, height), Image.ANTIALIAS)
 
 def get_mid_str(content, startStr, endStr):
-    startIndex = content.find(startStr, 0)  # 定位到起始字符串的首个字符，从起始位置开始查找
+    startIndex = content.find(startStr, 0)  # Locate the first character of the start string and start searching from the start position
 
     if startIndex >= 0:
         startIndex += len(startStr)
     else:
         return ""
 
-    end_index = content.find(endStr, startIndex)  # 定位到结束字符串，要从起始字符串开始查找
+    end_index = content.find(endStr, startIndex)  # To locate the end string, start from the beginning string.
 
     if end_index >= 0 and end_index >= startIndex:
         return content[startIndex:end_index]
@@ -119,7 +118,7 @@ class ui_object:
 
     def show_gui_movie_detail(self):
         '''
-        显示 影片详情 界面GUI
+        Displaying film message and graphical user interface
         '''
         self.label_img['state'] = NORMAL
         self.label_movie_name['state'] = NORMAL
@@ -129,9 +128,6 @@ class ui_object:
         self.label_movie_actor['state'] = NORMAL
 
     def hidden_gui_movie_detail(self):
-        '''
-        显示 影片详情 界面GUI
-        '''
         self.label_img['state'] = DISABLED
         self.label_movie_name['state'] = DISABLED
         self.label_movie_rating['state'] = DISABLED
@@ -146,11 +142,11 @@ class ui_object:
         item = self.treeview.selection()
         if item:
             item_text = self.treeview.item(item, "values")
-            movie_name = item_text[0]  # 输出电影名
+            movie_name = item_text[0]  # output movie_name
             for movie in self.jsondata:
                 if movie['title'] == movie_name:
 
-                    context = _create_unverified_context()  # 屏蔽ssl证书
+                    context = _create_unverified_context()  # Blocking SSL
                     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36'}
                     req = urllib.request.Request(url=movie['url'], headers=headers)
                     f = urllib.request.urlopen(req, context=context)
@@ -201,7 +197,7 @@ class ui_object:
 
     def show_movie_data(self, event):
         '''
-        显示某个被选择的电影的详情信息
+        Displaying details for a selected movie
         '''
         # self.hidden_gui_movie_detail()
         self.b_0_imdb['state'] = NORMAL
@@ -213,12 +209,12 @@ class ui_object:
         item = self.treeview.selection()
         if item:
             item_text = self.treeview.item(item, "values")
-            movie_name = item_text[0] # 输出电影名
+            movie_name = item_text[0] # output movie_name
             for movie in self.jsondata:
                 if(movie['title'] == movie_name):
                     img_url = movie['cover_url']
                     movie_name = movie['title']
-                    file_name = save_img(img_url, movie_name, 'img') #下载网络图片
+                    file_name = save_img(img_url, movie_name, 'img') # Download images
                     self.show_movie_img(file_name)
                     self.label_movie_name.config(text=movie['title'])
                     if(isinstance(movie['actors'],list)):
@@ -234,28 +230,28 @@ class ui_object:
         # self.show_gui_movie_detail()
     def show_movie_img(self, file_name):
         '''
-        更新图片GUI
-        :param file_name: 图片路径
+        Refresh images
+        :param file_name: image path
         :return:
         '''
-        img_open = Image.open(file_name) #读取本地图片
-        pil_image_resized = resize(160, 230, img_open) #等比例缩放本地图片
-        img = ImageTk.PhotoImage(pil_image_resized) #读入图片
+        img_open = Image.open(file_name) # load local images
+        pil_image_resized = resize(160, 230, img_open) # proportionally scaling local images
+        img = ImageTk.PhotoImage(pil_image_resized) # pull images
         self.label_img.config(image=img, width = pil_image_resized.size[0], height = pil_image_resized.size[1])
         self.label_img.image = img
 
     def center_window(self, root, w, h):
         """
-        窗口居于屏幕中央
+        Window centred
         :param root: root
-        :param w: 窗口宽度
-        :param h: 窗口高度
+        :param w: width
+        :param h: height
         :return:
         """
-        # 获取屏幕宽、高
+        # get the screen width and height
         ws = root.winfo_screenwidth()
         hs = root.winfo_screenheight()
-        # 计算 x, y 位置
+        # calculate x, y
         x = (ws/2) - (w/2)
         y = (hs/2) - (h/2)
 
@@ -263,7 +259,7 @@ class ui_object:
 
     def clear_tree(self, tree):
         '''
-        清空表格
+        clean tables
         '''
         x = tree.get_children()
         for item in x:
@@ -271,7 +267,7 @@ class ui_object:
 
     def add_tree(self,list, tree):
         '''
-        新增数据到表格
+        add data into tables
         '''
         i = 0
         for subList in list:
@@ -280,11 +276,7 @@ class ui_object:
         tree.grid()
 
     def searh_movie_in_rating(self):
-        """
-        从排行榜中搜索符合条件的影片信息
-        """
-        # 按钮设置为灰色状态
-        self.clear_tree(self.treeview)  # 清空表格
+        self.clear_tree(self.treeview)
         self.b_0['state'] = DISABLED
         self.c_type['state'] = DISABLED
         self.t_count['state'] = DISABLED
@@ -298,21 +290,18 @@ class ui_object:
         json_moviedata = loads(moviedata)
         for sub_moviedata in json_moviedata:
             if(sub_moviedata['title'] == self.c_type.get()):
-                res_data = get_url_data_in_ranking_list(sub_moviedata['type'], self.t_count.get(), self.t_rating.get(), self.t_vote.get())  # 返回符合条件的电影信息
+                res_data = get_url_data_in_ranking_list(sub_moviedata['type'], self.t_count.get(), self.t_rating.get(), self.t_vote.get())
                 if len(res_data) == 2:
-                    # 获取数据成功
                     res_list = res_data[0]
                     jsondata = res_data[1]
 
                     self.jsondata = jsondata
-                    self.add_tree(res_list, self.treeview)  # 将数据添加到tree中
+                    self.add_tree(res_list, self.treeview)
 
                 else:
-                    # 获取数据失败，出现异常
                     err_str = res_data[0]
                     messagebox.showinfo('提示', err_str[:1000])
 
-        # 按钮设置为正常状态
         self.b_0['state'] = NORMAL
         self.c_type['state'] = 'readonly'
         self.t_count['state'] = NORMAL
@@ -324,18 +313,13 @@ class ui_object:
 
     def keyboard_t_vote_keyword(self, event):
         """
-        在搜索框中键入回车键后触发相应的事件
         :param event:
         :return:
         """
         thread_it(self.searh_movie_in_keyword)
 
     def searh_movie_in_keyword(self):
-        """
-        从关键字中搜索符合条件的影片信息
-        """
-        # 按钮设置为灰色状态
-        self.clear_tree(self.treeview)  # 清空表格
+        self.clear_tree(self.treeview)
         self.b_0['state'] = DISABLED
         self.c_type['state'] = DISABLED
         self.t_count['state'] = DISABLED
@@ -348,18 +332,16 @@ class ui_object:
 
         res_data = get_url_data_in_keyword(self.t_vote_keyword.get())
         if len(res_data) == 2:
-            # 获取数据成功
             res_list = res_data[0]
             jsondata = res_data[1]
 
             self.jsondata = jsondata
-            self.add_tree(res_list, self.treeview)  # 将数据添加到tree中
+            self.add_tree(res_list, self.treeview)
         else:
-            # 获取数据失败，出现异常
             err_str = res_data[0]
             messagebox.showinfo('提示', err_str[:1000])
 
-        # 按钮设置为正常状态
+        # Formal status
         self.b_0['state'] = NORMAL
         self.c_type['state'] = 'readonly'
         self.t_count['state'] = NORMAL
@@ -371,7 +353,6 @@ class ui_object:
 
     def open_in_browser_douban_url(self, event):
         """
-        从浏览器中打开指定网页
         :param
         :return:
         """
@@ -385,7 +366,6 @@ class ui_object:
 
     def open_in_browser(self, event):
         """
-        从浏览器中打开指定网页
         :param
         :return:
         """
@@ -397,7 +377,6 @@ class ui_object:
 
     def open_in_browser_cloud_disk(self, event):
         """
-        从浏览器中打开指定网页
         :param
         :return:
         """
@@ -409,7 +388,6 @@ class ui_object:
 
     def open_in_browser_bt_download(self, event):
         """
-        从浏览器中打开指定网页
         :param
         :return:
         """
@@ -421,94 +399,88 @@ class ui_object:
 
     def ui_process(self):
         """
-        Ui主程序
         :param
         :return:
         """
         root = Tk()
         self.root = root
-        # 设置窗口位置
+        # Setting the window position
         root.title("豆瓣电影助手(支持筛选、下载电影)")
         self.center_window(root, 1000, 565)
-        root.resizable(0, 0)  # 框体大小可调性，分别表示x,y方向的可变性
-        # 从排行榜 电影搜索布局开始
-        # 容器控件
+        root.resizable(0, 0)
         labelframe = LabelFrame(root, width=660, height=300, text="搜索电影")
         labelframe.place(x=5, y=5)
         self.labelframe = labelframe
-        # 电影类型
         l_typeId = Label(labelframe, text='电影类型')
         l_typeId.place(x=0, y=10)
         self.l_typeId = l_typeId
-        #下拉列表框
         comvalue = StringVar()
         c_type = ttk.Combobox(labelframe, width=5, textvariable=comvalue, state='readonly')
-        # 将影片类型输入到下拉列表框中
-        json_moviedata = loads(moviedata) #json数据
+        json_moviedata = loads(moviedata) # json
         movieList = []
-        for sub_moviedata in json_moviedata: #对每一种类的电影题材进行操作
+        for sub_moviedata in json_moviedata:
             movieList.append(sub_moviedata['title'])
-        c_type["values"] = movieList #初始化
-        c_type.current(9)  # 选择第一个
+        c_type["values"] = movieList # initialisation
+        c_type.current(9)  # Firse
         c_type.place(x=65, y=8)
         self.c_type = c_type
-        # 想要获取的电影数量
+        # movie amount
         l_count = Label(labelframe, text='获取数量=')
         l_count.place(x=150, y=10)
         self.l_count = l_count
-        # 文本框
+        # text frame
         t_count = Entry(labelframe, width=5)
         t_count.delete(0, END)
         t_count.insert(0, '100')
         t_count.place(x=220, y=7)
         self.t_count = t_count
-        # 评分
+        # ranking
         l_rating = Label(labelframe, text='影片评分>')
         l_rating.place(x=280, y=10)
         self.l_rating = l_rating
-        # 文本框
+        # text frame
         t_rating = Entry(labelframe, width=5)
         t_rating.delete(0, END)
         t_rating.insert(0, '8.0')
         t_rating.place(x=350, y=7)
         self.t_rating = t_rating
-        # 评价人数
+        # amount
         l_vote = Label(labelframe, text='评价人数>')
         l_vote.place(x=410, y=10)
         self.l_vote = l_vote
-        # 文本框
+        # text frame
         t_vote = Entry(labelframe, width=7)
         t_vote.delete(0, END)
         t_vote.insert(0, '100000')
         t_vote.place(x=480, y=7)
         self.t_vote = t_vote
-        # 查询按钮
-        #lambda表示绑定的函数需要带参数，请勿删除lambda，否则会出现异常
-        #thread_it表示新开启一个线程执行这个函数，防止GUI界面假死无响应
+        # Search button
+        #lambda
+        #thread_it
         b_0 = Button(labelframe, text="从排行榜搜索")
         b_0.place(x=560, y=10)
         self.b_0 = b_0
-        # 框架布局，承载多个控件
+        # Frame location
         frame_root = Frame(labelframe, width=400)
         frame_l = Frame(frame_root)
         frame_r = Frame(frame_root)
         self.frame_root = frame_root
         self.frame_l = frame_l
         self.frame_r = frame_r
-        # 表格
+        # Table
         columns = ("影片名字", "影片评分", "同类排名", "评价人数")
         treeview = ttk.Treeview(frame_l, height=10, show="headings", columns=columns)
 
-        treeview.column("影片名字", width=210, anchor='center')  # 表示列,不显示
+        treeview.column("影片名字", width=210, anchor='center')  # display column
         treeview.column("影片评分", width=210, anchor='center')
         treeview.column("同类排名", width=100, anchor='center')
         treeview.column("评价人数", width=100, anchor='center')
 
-        treeview.heading("影片名字", text="影片名字")  # 显示表头
+        treeview.heading("影片名字", text="影片名字")  # display head
         treeview.heading("影片评分", text="影片评分")
         treeview.heading("同类排名", text="同类排名")
         treeview.heading("评价人数", text="评价人数")
-        #垂直滚动条
+        # vertical scrollbar
         vbar = ttk.Scrollbar(frame_r, command=treeview.yview)
         treeview.configure(yscrollcommand=vbar.set)
 
@@ -516,38 +488,34 @@ class ui_object:
         self.treeview = treeview
         vbar.pack(side=RIGHT, fill=Y)
         self.vbar = vbar
-        # 框架的位置布局
+        # Frame location
         frame_l.grid(row=0, column=0, sticky=NSEW)
         frame_r.grid(row=0, column=1, sticky=NS)
         frame_root.place(x=5, y=70)
-        # 从排行榜 电影搜索布局结束
 
-        # 输入关键字 电影搜索布局开始
-        # 影片名称
+        # Name
         l_vote_keyword = Label(labelframe, text='影片名称')
         l_vote_keyword.place(x=0, y=40)
         self.l_vote_keyword = l_vote_keyword
 
-        # 文本框
+        # text frame
         t_vote_keyword = Entry(labelframe, width=53)
         t_vote_keyword.delete(0, END)
         t_vote_keyword.insert(0, '新世纪福音战士')
         t_vote_keyword.place(x=66, y=37)
         self.t_vote_keyword = t_vote_keyword
-        # 查询按钮
-        #lambda表示绑定的函数需要带参数，请勿删除lambda，否则会出现异常
-        #thread_it表示新开启一个线程执行这个函数，防止GUI界面假死无响应
+        # Search button
+        #lambda
+        #thread_it
         b_0_keyword = Button(labelframe, text="从关键字搜索")
         b_0_keyword.place(x=560, y=40)
         self.b_0_keyword = b_0_keyword
-        # 输入关键字 电影搜索布局结束
 
-        # 电影详情布局开始
-        # 容器控件
+        # Container modules
         labelframe_movie_detail = LabelFrame(root, text="影片详情")
         labelframe_movie_detail.place(x=670, y=5)
         self.labelframe_movie_detail = labelframe_movie_detail
-        # 框架布局，承载多个控件
+        # Frame
         frame_left_movie_detail = Frame(labelframe_movie_detail, width=160,height=280)
         frame_left_movie_detail.grid(row=0, column=0)
         self.frame_left_movie_detail = frame_left_movie_detail
@@ -555,57 +523,55 @@ class ui_object:
         frame_right_movie_detail = Frame(labelframe_movie_detail, width=160,height=280)
         frame_right_movie_detail.grid(row=0, column=1)
         self.frame_right_movie_detail = frame_right_movie_detail
-        #影片图片
+        # image
         label_img = Label(frame_left_movie_detail, text="", anchor=N)
         label_img.place(x=0,y=0) #布局
         self.label_img = label_img
-        # IMDB评分
+        # IMDB ranks
         ft_rating_imdb = font.Font(weight=font.BOLD)
         label_movie_rating_imdb = Label(frame_left_movie_detail, text="IMDB评分", fg='#7F00FF', font=ft_rating_imdb, anchor=NW)
         label_movie_rating_imdb.place(x=0, y=250)
         self.label_movie_rating_imdb = label_movie_rating_imdb
-        # 查询按钮
+        # Search button
         b_0_imdb = Button(frame_left_movie_detail, text="详情")
         b_0_imdb.place(x=115, y=250)
         self.b_0_imdb = b_0_imdb
-        #影片名字
+        # Name
         ft = font.Font(size=15, weight=font.BOLD)
         label_movie_name = Label(frame_right_movie_detail, text="影片名字", fg='#FF0000', font=ft,anchor=NW)
         label_movie_name.place(x=0, y=0)
         self.label_movie_name = label_movie_name
-        #影片评分
+        # Ranking
         ft_rating = font.Font(weight=font.BOLD)
         label_movie_rating = Label(frame_right_movie_detail, text="影片评价", fg='#7F00FF', font=ft_rating, anchor=NW)
         label_movie_rating.place(x=0, y=30)
         self.label_movie_rating = label_movie_rating
-        #影片年代
+        # Age
         ft_time = font.Font(weight=font.BOLD)
         label_movie_time = Label(frame_right_movie_detail, text="影片日期", fg='#666600', font=ft_time, anchor=NW)
         label_movie_time.place(x=0, y=60)
         self.label_movie_time = label_movie_time
-        #影片类型
+        # Type
         ft_type = font.Font(weight=font.BOLD)
         label_movie_type = Label(frame_right_movie_detail, text="影片类型", fg='#330033', font=ft_type, anchor=NW)
         label_movie_type.place(x=0, y=90)
         self.label_movie_type = label_movie_type
-        #影片演员
+        # Actor
         label_movie_actor = Label(frame_right_movie_detail, text="影片演员", wraplength=135, justify = 'left', anchor=NW)
         label_movie_actor.place(x=0, y=120)
         self.label_movie_actor = label_movie_actor
-        # 电影详情布局结束
 
-        # 在线播放布局开始
         labelframe_movie_play_online = LabelFrame(root, width=324, height=230, text="在线观看")
         labelframe_movie_play_online.place(x=5, y=305)
         self.labelframe_movie_play_online = labelframe_movie_play_online
-        # 框架布局，承载多个控件
+        # Frame
         frame_root_play_online = Frame(labelframe_movie_play_online, width=324)
         frame_l_play_online = Frame(frame_root_play_online)
         frame_r_play_online = Frame(frame_root_play_online)
         self.frame_root_play_online = frame_root_play_online
         self.frame_l_play_online = frame_l_play_online
         self.frame_r_play_online = frame_r_play_online
-        # 表格
+        # Table
         columns_play_online = ("来源名称", "是否免费","播放地址")
         treeview_play_online = ttk.Treeview(frame_l_play_online, height=10, show="headings", columns=columns_play_online)
         treeview_play_online.column("来源名称", width=90, anchor='center')
@@ -614,7 +580,7 @@ class ui_object:
         treeview_play_online.heading("来源名称", text="来源名称")
         treeview_play_online.heading("是否免费", text="是否免费")
         treeview_play_online.heading("播放地址", text="播放地址")
-        #垂直滚动条
+        # vertical scrollbar
         vbar_play_online = ttk.Scrollbar(frame_r_play_online, command=treeview_play_online.yview)
         treeview_play_online.configure(yscrollcommand=vbar_play_online.set)
 
@@ -622,24 +588,22 @@ class ui_object:
         self.treeview_play_online = treeview_play_online
         vbar_play_online.pack(side=RIGHT, fill=Y)
         self.vbar_play_online = vbar_play_online
-        # 框架的位置布局
+        # Frame location
         frame_l_play_online.grid(row=0, column=0, sticky=NSEW)
         frame_r_play_online.grid(row=0, column=1, sticky=NS)
         frame_root_play_online.place(x=5, y=0)
-        # 在线播放布局结束
 
-        # 保存到云盘布局开始
         labelframe_movie_save_cloud_disk = LabelFrame(root, width=324, height=230, text="云盘搜索")
         labelframe_movie_save_cloud_disk.place(x=340, y=305)
         self.labelframe_movie_save_cloud_disk = labelframe_movie_save_cloud_disk
-        # 框架布局，承载多个控件
+        # Frame
         frame_root_save_cloud_disk = Frame(labelframe_movie_save_cloud_disk, width=324)
         frame_l_save_cloud_disk = Frame(frame_root_save_cloud_disk)
         frame_r_save_cloud_disk = Frame(frame_root_save_cloud_disk)
         self.frame_root_save_cloud_disk = frame_root_save_cloud_disk
         self.frame_l_save_cloud_disk = frame_l_save_cloud_disk
         self.frame_r_save_cloud_disk = frame_r_save_cloud_disk
-        # 表格
+        # Table
         columns_save_cloud_disk = ("来源名称", "是否有效","播放地址")
         treeview_save_cloud_disk = ttk.Treeview(frame_l_save_cloud_disk, height=10, show="headings", columns=columns_save_cloud_disk)
         treeview_save_cloud_disk.column("来源名称", width=90, anchor='center')
@@ -648,7 +612,7 @@ class ui_object:
         treeview_save_cloud_disk.heading("来源名称", text="来源名称")
         treeview_save_cloud_disk.heading("是否有效", text="是否有效")
         treeview_save_cloud_disk.heading("播放地址", text="播放地址")
-        #垂直滚动条
+        # vertical scrollbar
         vbar_save_cloud_disk = ttk.Scrollbar(frame_r_save_cloud_disk, command=treeview_save_cloud_disk.yview)
         treeview_save_cloud_disk.configure(yscrollcommand=vbar_save_cloud_disk.set)
 
@@ -656,24 +620,22 @@ class ui_object:
         self.treeview_save_cloud_disk = treeview_save_cloud_disk
         vbar_save_cloud_disk.pack(side=RIGHT, fill=Y)
         self.vbar_save_cloud_disk = vbar_save_cloud_disk
-        # 框架的位置布局
+        # Frame location
         frame_l_save_cloud_disk.grid(row=0, column=0, sticky=NSEW)
         frame_r_save_cloud_disk.grid(row=0, column=1, sticky=NS)
         frame_root_save_cloud_disk.place(x=5, y=0)
-        # 保存到云盘布局结束
 
-        # BT下载布局开始
         labelframe_movie_bt_download = LabelFrame(root, width=324, height=230, text="影视下载")
         labelframe_movie_bt_download.place(x=670, y=305)
         self.labelframe_movie_bt_download = labelframe_movie_bt_download
-        # 框架布局，承载多个控件
+        # Frame
         frame_root_bt_download = Frame(labelframe_movie_bt_download, width=324)
         frame_l_bt_download = Frame(frame_root_bt_download)
         frame_r_bt_download = Frame(frame_root_bt_download)
         self.frame_root_bt_download = frame_root_bt_download
         self.frame_l_bt_download = frame_l_bt_download
         self.frame_r_bt_download = frame_r_bt_download
-        # 表格
+        # Table
         columns_bt_download = ("来源名称", "是否有效","播放地址")
         treeview_bt_download = ttk.Treeview(frame_l_bt_download, height=10, show="headings", columns=columns_bt_download)
         treeview_bt_download.column("来源名称", width=90, anchor='center')
@@ -682,7 +644,7 @@ class ui_object:
         treeview_bt_download.heading("来源名称", text="来源名称")
         treeview_bt_download.heading("是否有效", text="是否有效")
         treeview_bt_download.heading("播放地址", text="播放地址")
-        #垂直滚动条
+        # vertical scrollbar
         vbar_bt_download = ttk.Scrollbar(frame_r_bt_download, command=treeview_bt_download.yview)
         treeview_bt_download.configure(yscrollcommand=vbar_bt_download.set)
 
@@ -690,29 +652,28 @@ class ui_object:
         self.treeview_bt_download = treeview_bt_download
         vbar_bt_download.pack(side=RIGHT, fill=Y)
         self.vbar_bt_download = vbar_bt_download
-        # 框架的位置布局
+
         frame_l_bt_download.grid(row=0, column=0, sticky=NSEW)
         frame_r_bt_download.grid(row=0, column=1, sticky=NS)
         frame_root_bt_download.place(x=5, y=0)
-        # BT下载布局结束
 
-        #项目的一些信息
         ft = font.Font(size=14, weight=font.BOLD)
         project_statement = Label(root, text=".", fg='#000000', font=ft,anchor=NW)
         project_statement.place(x=5, y=540)
         self.project_statement = project_statement
-        #绑定事件
-        treeview.bind('<<TreeviewSelect>>', self.show_movie_data)  # 表格绑定选择事件
-        treeview.bind('<Double-1>', self.open_in_browser_douban_url)  # 表格绑定鼠标左键事件
-        treeview_play_online.bind('<Double-1>', self.open_in_browser)  # 表格绑定左键双击事件
-        treeview_save_cloud_disk.bind('<Double-1>', self.open_in_browser_cloud_disk)  # 表格绑定左键双击事件
-        treeview_bt_download.bind('<Double-1>', self.open_in_browser_bt_download)  # 表格绑定左键双击事件
-        b_0.configure(command=lambda:thread_it(self.searh_movie_in_rating)) #按钮绑定单击事件
-        b_0_keyword.configure(command=lambda:thread_it(self.searh_movie_in_keyword)) #按钮绑定单击事件
-        b_0_imdb.configure(command=lambda: thread_it(self.show_imdb_rating))  # 按钮绑定单击事件
-        t_vote_keyword.bind('<Return>', handler_adaptor(self.keyboard_t_vote_keyword))  # 文本框绑定选择事件
-        project_statement.bind('<ButtonPress-1>', self.project_statement_show)  # 标签绑定鼠标单击事件
-        project_statement.bind('<Enter>', self.project_statement_get_focus)  # 标签绑定获得焦点事件
-        project_statement.bind('<Leave>', self.project_statement_lose_focus)  # 标签绑定失去焦点事件
+
+        # bind event
+        treeview.bind('<<TreeviewSelect>>', self.show_movie_data)
+        treeview.bind('<Double-1>', self.open_in_browser_douban_url)
+        treeview_play_online.bind('<Double-1>', self.open_in_browser)
+        treeview_save_cloud_disk.bind('<Double-1>', self.open_in_browser_cloud_disk)
+        treeview_bt_download.bind('<Double-1>', self.open_in_browser_bt_download)
+        b_0.configure(command=lambda:thread_it(self.searh_movie_in_rating))
+        b_0_keyword.configure(command=lambda:thread_it(self.searh_movie_in_keyword))
+        b_0_imdb.configure(command=lambda: thread_it(self.show_imdb_rating))
+        t_vote_keyword.bind('<Return>', handler_adaptor(self.keyboard_t_vote_keyword))
+        project_statement.bind('<ButtonPress-1>', self.project_statement_show)
+        project_statement.bind('<Enter>', self.project_statement_get_focus)
+        project_statement.bind('<Leave>', self.project_statement_lose_focus)
 
         root.mainloop()
