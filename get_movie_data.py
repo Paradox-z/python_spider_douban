@@ -76,7 +76,7 @@ def get_url_data_in_ranking_list(typeId, movie_count, rating, vote_count):
         return [res_list, jsondata]
 
     except Exception as ex:
-        err_str = "出现未知异常：{}".format(ex)
+        err_str = "Unknown error: {}".format(ex)
         return [err_str]
 
 def get_url_data_in_keyword(key_word):
@@ -103,7 +103,7 @@ def get_url_data_in_keyword(key_word):
         load_driver_success = True
     except Exception as ex:
         load_driver_success = False
-        err_str = "加载chromedriver驱动失败，请下载chromedriver驱动并填写正确的路径。\n\n异常信息：{}".format(ex)
+        err_str = "Fail to load chromedriver, download chromedriver again and write the correct path.\n\nError information: {}".format(ex)
         return [err_str]
 
 
@@ -169,5 +169,5 @@ def get_url_data_in_keyword(key_word):
 
         except Exception as ex:
             browser.quit()  # browser closed
-            err_str = "chromedriver驱动加载成功，但是出现其他未知异常：{}".format(ex)
+            err_str = "chromedriver load successfully, whereas unknown error happened: {}".format(ex)
             return [err_str]
