@@ -3,7 +3,8 @@
 The system is designed to automate data collection. It can be configured to search for keywords, rank and screen based on data from the film site. Implemented to generate recommendations based on user preferences by analysing search data and browsing history.
 ## Project content
 Design a program framework and implement the following functions:\
-**-1-** Initialize the UI framework and load the interface elements.**-2-** Construct requests based on keywords and parse the returned data.\
+**-1-** Initialize the UI framework and load the interface elements.\
+**-2-** Construct requests based on keywords and parse the returned data.\
 **-3-** Construct requests based on filtering conditions and parse the ranking interface data.\
 **-4-** Implement local storage for the parsed image and text data.
 ## Project highlights
