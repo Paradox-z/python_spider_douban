@@ -52,7 +52,7 @@ def get_url_data_in_ranking_list(typeId, movie_count, rating, vote_count):
     """
 
     try:
-        context = _create_unverified_context()  # blocking SSL
+        context = _create_unverified_context()  # SSL blocked
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36'}
         url = 'https://movie.douban.com/j/chart/top_list?type=' + str(typeId) + '&interval_id=100:90&action=unwatched&start=0&limit=' + str(movie_count)
         req = urllib.request.Request(url=url, headers=headers)
