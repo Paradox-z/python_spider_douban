@@ -31,7 +31,9 @@ from webbrowser import open
 import urllib
 import os
 import ssl
-ssl._create_default_https_context = ssl._create_unverified_context #关闭SSL证书验证
+ssl._create_default_https_context = ssl._create_unverified_context # SSL blocked
+
+# Maybe we should do UI frame design with PyQT, that's the solution for enterprise testing and development.
 
 def thread_it(func, *args):
     '''
@@ -59,7 +61,7 @@ def save_img(img_url, file_name, file_path):
     try:
         # Determining whether a folder already exists
         if not os.path.exists(file_path):
-            print('文件夹',file_path,'不存在，重新建立')
+            print('Folder',file_path,'not exist, rebuild.')
             os.makedirs(file_path)
         # Get file suffix
         file_suffix = os.path.splitext(img_url)[1]
@@ -68,15 +70,15 @@ def save_img(img_url, file_name, file_path):
 
         # Determining whether a folder already exists
         if not os.path.exists(filename):
-            print('文件', filename, '不存在，重新建立')
+            print('document', filename, 'not exist, rebuild.')
             # Download and save images
             urllib.request.urlretrieve(img_url, filename=filename)
         return filename
 
     except IOError as e:
-        print('下载图片操作失败',e)
+        print('Fail to download images',e)
     except Exception as e:
-        print('错误:',e)
+        print('Error:',e)
 
 def resize(w_box, h_box, pil_image):
     """
