@@ -138,7 +138,7 @@ class ui_object:
         self.label_movie_actor['state'] = DISABLED
 
     def show_imdb_rating(self):
-        self.label_movie_rating_imdb.config(text='正在加载IMDB评分')
+        self.label_movie_rating_imdb.config(text='Loading ranking IMDb')
         self.b_0_imdb['state'] = DISABLED
 
         item = self.treeview.selection()
@@ -161,7 +161,7 @@ class ui_object:
 
                     res_list = []
                     for i in range(len(name)):
-                        res_list.append([name[i], "仅限VIP", down_url[i]])
+                        res_list.append([name[i], "VIP blocked", down_url[i]])
                     self.add_tree(res_list, self.treeview_play_online)
 
                     self.clear_tree(self.treeview_save_cloud_disk)
