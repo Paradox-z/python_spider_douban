@@ -166,28 +166,28 @@ class ui_object:
 
                     self.clear_tree(self.treeview_save_cloud_disk)
                     res_list = []
-                    res_list.append(["56网盘搜索", "有效", "https://www.56wangpan.com/search/o2kw" + quote(movie['title'])])
-                    res_list.append(["小白盘", "有效", "https://www.xiaobaipan.com/list-" + quote(movie['title']) + "-1.html" ])
+                    res_list.append(["56网盘搜索", "Verified", "https://www.56wangpan.com/search/o2kw" + quote(movie['title'])])
+                    res_list.append(["小白盘", "Verified", "https://www.xiaobaipan.com/list-" + quote(movie['title']) + "-1.html" ])
                     self.add_tree(res_list, self.treeview_save_cloud_disk)
 
                     self.clear_tree(self.treeview_bt_download)
                     res_list = []
-                    res_list.append(['LOL电影', '有效', 'http://www.993dy.com/index.php?m=vod-search&wd=' + quote(movie['title'])])
-                    res_list.append(['看美剧', '有效', 'http://www.kanmeiju.net/index.php?s=/video/search/wd/' + quote(movie['title'])])
-                    res_list.append(['飘花资源网', '有效', 'https://www.piaohua.com/plus/search.php?kwtype=0&keyword=' + quote(movie['title'])])
-                    res_list.append(['中国高清网', '有效', 'http://gaoqing.la/?s=' + quote(movie['title'])])
+                    res_list.append(['LOL电影', 'Verified', 'http://www.993dy.com/index.php?m=vod-search&wd=' + quote(movie['title'])])
+                    res_list.append(['看美剧', 'Verified', 'http://www.kanmeiju.net/index.php?s=/video/search/wd/' + quote(movie['title'])])
+                    res_list.append(['飘花资源网', 'Verified', 'https://www.piaohua.com/plus/search.php?kwtype=0&keyword=' + quote(movie['title'])])
+                    res_list.append(['中国高清网', 'Verified', 'http://gaoqing.la/?s=' + quote(movie['title'])])
                     self.add_tree(res_list, self.treeview_bt_download)
 
-                    imdb_num = get_mid_str(response, 'IMDB:</span>', '<br>').strip()
+                    imdb_num = get_mid_str(response, 'IMDb:</span>', '<br>').strip()
                     imdb_url = "https://www.imdb.com/title/{}/".format(imdb_num)
-                    print("电影名:{}, IMDB:{}".format(movie['title'], imdb_num))
+                    print("Film name:{}, IMDb:{}".format(movie['title'], imdb_num))
 
                     f = urllib.request.urlopen(imdb_url)
                     data_imdb = f.read().decode()
                     rating_imdb = get_mid_str(data_imdb, '{"@type":"AggregateRating"', '}')
                     rating_imdb = rating_imdb.split(":")[-1]
 
-                    self.label_movie_rating_imdb.config(text='IMDB评分:' + rating_imdb + '分')
+                    self.label_movie_rating_imdb.config(text='IMDb rate:' + rating_imdb + '')
 
         self.b_0_imdb['state'] = NORMAL
 
