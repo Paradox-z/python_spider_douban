@@ -203,7 +203,7 @@ class ui_object:
         '''
         # self.hidden_gui_movie_detail()
         self.b_0_imdb['state'] = NORMAL
-        self.label_movie_rating_imdb.config(text = 'IMDB评分')
+        self.label_movie_rating_imdb.config(text = 'IMDb rate:')
         self.clear_tree(self.treeview_play_online)
         self.clear_tree(self.treeview_save_cloud_disk)
         self.clear_tree(self.treeview_bt_download)
@@ -224,7 +224,7 @@ class ui_object:
                     else:
                         string_actors = movie['actors']
                     self.label_movie_actor.config(text=string_actors)
-                    self.label_movie_rating.config(text=str(movie['rating'][0]) + '分 ' + str(movie['vote_count']) + '人评价')
+                    self.label_movie_rating.config(text=str(movie['rating'][0]) + ' ' + str(movie['vote_count']) + 'rating')
                     self.label_movie_time.config(text=movie['release_date'])
                     self.label_movie_type.config(text=movie['types'])
 
