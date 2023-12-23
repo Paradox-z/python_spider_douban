@@ -286,7 +286,7 @@ class ui_object:
         self.t_vote['state'] = DISABLED
         self.b_0_keyword['state'] = DISABLED
         self.t_vote_keyword['state'] = DISABLED
-        self.b_0['text'] = '正在努力搜索'
+        self.b_0['text'] = 'Trying to search'
         self.jsondata = ""
 
         json_moviedata = loads(moviedata)
@@ -302,7 +302,7 @@ class ui_object:
 
                 else:
                     err_str = res_data[0]
-                    messagebox.showinfo('提示', err_str[:1000])
+                    messagebox.showinfo('Notification', err_str[:1000])
 
         self.b_0['state'] = NORMAL
         self.c_type['state'] = 'readonly'
@@ -311,7 +311,7 @@ class ui_object:
         self.t_vote['state'] = NORMAL
         self.b_0_keyword['state'] = NORMAL
         self.t_vote_keyword['state'] = NORMAL
-        self.b_0['text'] = '排行榜搜索'
+        self.b_0['text'] = 'Search by ranking'
 
     def keyboard_t_vote_keyword(self, event):
         """
