@@ -329,7 +329,7 @@ class ui_object:
         self.t_vote['state'] = DISABLED
         self.b_0_keyword['state'] = DISABLED
         self.t_vote_keyword['state'] = DISABLED
-        self.b_0_keyword['text'] = '正在努力搜索'
+        self.b_0_keyword['text'] = 'Trying to search'
         self.jsondata = ""
 
         res_data = get_url_data_in_keyword(self.t_vote_keyword.get())
@@ -341,7 +341,7 @@ class ui_object:
             self.add_tree(res_list, self.treeview)
         else:
             err_str = res_data[0]
-            messagebox.showinfo('提示', err_str[:1000])
+            messagebox.showinfo('Notification', err_str[:1000])
 
         # Formal status
         self.b_0['state'] = NORMAL
@@ -351,7 +351,7 @@ class ui_object:
         self.t_vote['state'] = NORMAL
         self.b_0_keyword['state'] = NORMAL
         self.t_vote_keyword['state'] = NORMAL
-        self.b_0_keyword['text'] = '关键字搜索'
+        self.b_0_keyword['text'] = 'Search by keywords'
 
     def open_in_browser_douban_url(self, event):
         """
