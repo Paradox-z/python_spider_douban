@@ -407,13 +407,13 @@ class ui_object:
         root = Tk()
         self.root = root
         # Setting the window position
-        root.title("豆瓣电影助手(支持筛选、下载电影)")
+        root.title("Little Movie Assistant(Support for filtering and downloading movies, etc.)")
         self.center_window(root, 1000, 565)
         root.resizable(0, 0)
-        labelframe = LabelFrame(root, width=660, height=300, text="搜索电影")
+        labelframe = LabelFrame(root, width=660, height=300, text="Search")
         labelframe.place(x=5, y=5)
         self.labelframe = labelframe
-        l_typeId = Label(labelframe, text='电影类型')
+        l_typeId = Label(labelframe, text='Film Type')
         l_typeId.place(x=0, y=10)
         self.l_typeId = l_typeId
         comvalue = StringVar()
@@ -423,11 +423,11 @@ class ui_object:
         for sub_moviedata in json_moviedata:
             movieList.append(sub_moviedata['title'])
         c_type["values"] = movieList # initialisation
-        c_type.current(9)  # Firse
+        c_type.current(9)  # First
         c_type.place(x=65, y=8)
         self.c_type = c_type
         # movie amount
-        l_count = Label(labelframe, text='获取数量=')
+        l_count = Label(labelframe, text='GetAmount:')
         l_count.place(x=150, y=10)
         self.l_count = l_count
         # text frame
