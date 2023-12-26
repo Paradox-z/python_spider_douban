@@ -427,7 +427,7 @@ class ui_object:
         c_type.place(x=65, y=8)
         self.c_type = c_type
         # movie amount
-        l_count = Label(labelframe, text='GetAmount:')
+        l_count = Label(labelframe, text='GetQuantities:')
         l_count.place(x=150, y=10)
         self.l_count = l_count
         # text frame
@@ -437,7 +437,7 @@ class ui_object:
         t_count.place(x=220, y=7)
         self.t_count = t_count
         # ranking
-        l_rating = Label(labelframe, text='影片评分>')
+        l_rating = Label(labelframe, text='FilmRating>')
         l_rating.place(x=280, y=10)
         self.l_rating = l_rating
         # text frame
@@ -447,7 +447,7 @@ class ui_object:
         t_rating.place(x=350, y=7)
         self.t_rating = t_rating
         # amount
-        l_vote = Label(labelframe, text='评价人数>')
+        l_vote = Label(labelframe, text='RatingQuantities>')
         l_vote.place(x=410, y=10)
         self.l_vote = l_vote
         # text frame
@@ -459,7 +459,7 @@ class ui_object:
         # Search button
         #lambda
         #thread_it
-        b_0 = Button(labelframe, text="从排行榜搜索")
+        b_0 = Button(labelframe, text="SearchByRanking")
         b_0.place(x=560, y=10)
         self.b_0 = b_0
         # Frame location
