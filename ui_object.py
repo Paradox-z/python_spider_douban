@@ -470,18 +470,18 @@ class ui_object:
         self.frame_l = frame_l
         self.frame_r = frame_r
         # Table
-        columns = ("影片名字", "影片评分", "同类排名", "评价人数")
+        columns = ("FilmName", "FilmRating", "PeerRanking", "RatingQuantities")
         treeview = ttk.Treeview(frame_l, height=10, show="headings", columns=columns)
 
-        treeview.column("影片名字", width=210, anchor='center')  # display column
-        treeview.column("影片评分", width=210, anchor='center')
-        treeview.column("同类排名", width=100, anchor='center')
-        treeview.column("评价人数", width=100, anchor='center')
+        treeview.column("FilmName", width=210, anchor='center')  # display column
+        treeview.column("FilmRating", width=210, anchor='center')
+        treeview.column("PeerRanking", width=100, anchor='center')
+        treeview.column("RatingQuantities", width=100, anchor='center')
 
-        treeview.heading("影片名字", text="影片名字")  # display head
-        treeview.heading("影片评分", text="影片评分")
-        treeview.heading("同类排名", text="同类排名")
-        treeview.heading("评价人数", text="评价人数")
+        treeview.heading("FilmName", text="FilmName")  # display head
+        treeview.heading("FilmRating", text="FilmRating")
+        treeview.heading("PeerRanking", text="PeerRanking")
+        treeview.heading("RatingQuantities", text="RatingQuantities")
         # vertical scrollbar
         vbar = ttk.Scrollbar(frame_r, command=treeview.yview)
         treeview.configure(yscrollcommand=vbar.set)
@@ -496,20 +496,20 @@ class ui_object:
         frame_root.place(x=5, y=70)
 
         # Name
-        l_vote_keyword = Label(labelframe, text='影片名称')
+        l_vote_keyword = Label(labelframe, text='FilmName')
         l_vote_keyword.place(x=0, y=40)
         self.l_vote_keyword = l_vote_keyword
 
         # text frame
         t_vote_keyword = Entry(labelframe, width=53)
         t_vote_keyword.delete(0, END)
-        t_vote_keyword.insert(0, '新世纪福音战士')
+        t_vote_keyword.insert(0, 'Evangelion')
         t_vote_keyword.place(x=66, y=37)
         self.t_vote_keyword = t_vote_keyword
         # Search button
         #lambda
         #thread_it
-        b_0_keyword = Button(labelframe, text="从关键字搜索")
+        b_0_keyword = Button(labelframe, text="SearchByKeywords")
         b_0_keyword.place(x=560, y=40)
         self.b_0_keyword = b_0_keyword
 
