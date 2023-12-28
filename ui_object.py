@@ -514,7 +514,7 @@ class ui_object:
         self.b_0_keyword = b_0_keyword
 
         # Container modules
-        labelframe_movie_detail = LabelFrame(root, text="影片详情")
+        labelframe_movie_detail = LabelFrame(root, text="FilmDescription")
         labelframe_movie_detail.place(x=670, y=5)
         self.labelframe_movie_detail = labelframe_movie_detail
         # Frame
@@ -527,15 +527,15 @@ class ui_object:
         self.frame_right_movie_detail = frame_right_movie_detail
         # image
         label_img = Label(frame_left_movie_detail, text="", anchor=N)
-        label_img.place(x=0,y=0) #布局
+        label_img.place(x=0,y=0)     #Layout
         self.label_img = label_img
-        # IMDB ranks
+        # IMDb ranks
         ft_rating_imdb = font.Font(weight=font.BOLD)
-        label_movie_rating_imdb = Label(frame_left_movie_detail, text="IMDB评分", fg='#7F00FF', font=ft_rating_imdb, anchor=NW)
+        label_movie_rating_imdb = Label(frame_left_movie_detail, text="IMDb Ranks", fg='#7F00FF', font=ft_rating_imdb, anchor=NW)
         label_movie_rating_imdb.place(x=0, y=250)
         self.label_movie_rating_imdb = label_movie_rating_imdb
         # Search button
-        b_0_imdb = Button(frame_left_movie_detail, text="详情")
+        b_0_imdb = Button(frame_left_movie_detail, text="Detail")
         b_0_imdb.place(x=115, y=250)
         self.b_0_imdb = b_0_imdb
         # Name
