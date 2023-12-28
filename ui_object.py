@@ -540,30 +540,30 @@ class ui_object:
         self.b_0_imdb = b_0_imdb
         # Name
         ft = font.Font(size=15, weight=font.BOLD)
-        label_movie_name = Label(frame_right_movie_detail, text="影片名字", fg='#FF0000', font=ft,anchor=NW)
+        label_movie_name = Label(frame_right_movie_detail, text="FilmName", fg='#FF0000', font=ft,anchor=NW)
         label_movie_name.place(x=0, y=0)
         self.label_movie_name = label_movie_name
         # Ranking
         ft_rating = font.Font(weight=font.BOLD)
-        label_movie_rating = Label(frame_right_movie_detail, text="影片评价", fg='#7F00FF', font=ft_rating, anchor=NW)
+        label_movie_rating = Label(frame_right_movie_detail, text="FilmRating", fg='#7F00FF', font=ft_rating, anchor=NW)
         label_movie_rating.place(x=0, y=30)
         self.label_movie_rating = label_movie_rating
         # Age
         ft_time = font.Font(weight=font.BOLD)
-        label_movie_time = Label(frame_right_movie_detail, text="影片日期", fg='#666600', font=ft_time, anchor=NW)
+        label_movie_time = Label(frame_right_movie_detail, text="MovieData", fg='#666600', font=ft_time, anchor=NW)
         label_movie_time.place(x=0, y=60)
         self.label_movie_time = label_movie_time
         # Type
         ft_type = font.Font(weight=font.BOLD)
-        label_movie_type = Label(frame_right_movie_detail, text="影片类型", fg='#330033', font=ft_type, anchor=NW)
+        label_movie_type = Label(frame_right_movie_detail, text="MovieType", fg='#330033', font=ft_type, anchor=NW)
         label_movie_type.place(x=0, y=90)
         self.label_movie_type = label_movie_type
         # Actor
-        label_movie_actor = Label(frame_right_movie_detail, text="影片演员", wraplength=135, justify = 'left', anchor=NW)
+        label_movie_actor = Label(frame_right_movie_detail, text="MovieActor", wraplength=135, justify = 'left', anchor=NW)
         label_movie_actor.place(x=0, y=120)
         self.label_movie_actor = label_movie_actor
 
-        labelframe_movie_play_online = LabelFrame(root, width=324, height=230, text="在线观看")
+        labelframe_movie_play_online = LabelFrame(root, width=324, height=230, text="OnlinePlay")
         labelframe_movie_play_online.place(x=5, y=305)
         self.labelframe_movie_play_online = labelframe_movie_play_online
         # Frame
