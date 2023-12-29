@@ -574,14 +574,14 @@ class ui_object:
         self.frame_l_play_online = frame_l_play_online
         self.frame_r_play_online = frame_r_play_online
         # Table
-        columns_play_online = ("来源名称", "是否免费","播放地址")
+        columns_play_online = ("SourceName", "FreeOrNot","PlayAddress")
         treeview_play_online = ttk.Treeview(frame_l_play_online, height=10, show="headings", columns=columns_play_online)
-        treeview_play_online.column("来源名称", width=90, anchor='center')
-        treeview_play_online.column("是否免费", width=80, anchor='center')
-        treeview_play_online.column("播放地址", width=120, anchor='center')
-        treeview_play_online.heading("来源名称", text="来源名称")
-        treeview_play_online.heading("是否免费", text="是否免费")
-        treeview_play_online.heading("播放地址", text="播放地址")
+        treeview_play_online.column("SourceName", width=90, anchor='center')
+        treeview_play_online.column("FreeOrNot", width=80, anchor='center')
+        treeview_play_online.column("PlayAddress", width=120, anchor='center')
+        treeview_play_online.heading("SourceName", text="SourceName")
+        treeview_play_online.heading("FreeOrNot", text="FreeOrNot")
+        treeview_play_online.heading("PlayAddress", text="PlayAddress")
         # vertical scrollbar
         vbar_play_online = ttk.Scrollbar(frame_r_play_online, command=treeview_play_online.yview)
         treeview_play_online.configure(yscrollcommand=vbar_play_online.set)
@@ -595,7 +595,7 @@ class ui_object:
         frame_r_play_online.grid(row=0, column=1, sticky=NS)
         frame_root_play_online.place(x=5, y=0)
 
-        labelframe_movie_save_cloud_disk = LabelFrame(root, width=324, height=230, text="云盘搜索")
+        labelframe_movie_save_cloud_disk = LabelFrame(root, width=324, height=230, text="SearchWithCloud")
         labelframe_movie_save_cloud_disk.place(x=340, y=305)
         self.labelframe_movie_save_cloud_disk = labelframe_movie_save_cloud_disk
         # Frame
@@ -606,14 +606,14 @@ class ui_object:
         self.frame_l_save_cloud_disk = frame_l_save_cloud_disk
         self.frame_r_save_cloud_disk = frame_r_save_cloud_disk
         # Table
-        columns_save_cloud_disk = ("来源名称", "是否有效","播放地址")
+        columns_save_cloud_disk = ("SourceName", "VerifyOrNot","PlayAddress")
         treeview_save_cloud_disk = ttk.Treeview(frame_l_save_cloud_disk, height=10, show="headings", columns=columns_save_cloud_disk)
-        treeview_save_cloud_disk.column("来源名称", width=90, anchor='center')
-        treeview_save_cloud_disk.column("是否有效", width=80, anchor='center')
-        treeview_save_cloud_disk.column("播放地址", width=120, anchor='center')
-        treeview_save_cloud_disk.heading("来源名称", text="来源名称")
-        treeview_save_cloud_disk.heading("是否有效", text="是否有效")
-        treeview_save_cloud_disk.heading("播放地址", text="播放地址")
+        treeview_save_cloud_disk.column("SourceName", width=90, anchor='center')
+        treeview_save_cloud_disk.column("VerifyOrNot", width=80, anchor='center')
+        treeview_save_cloud_disk.column("PlayAddress", width=120, anchor='center')
+        treeview_save_cloud_disk.heading("SourceName", text="SourceName")
+        treeview_save_cloud_disk.heading("VerifyOrNot", text="VerifyOrNot")
+        treeview_save_cloud_disk.heading("PlayAddress", text="PlayAddress")
         # vertical scrollbar
         vbar_save_cloud_disk = ttk.Scrollbar(frame_r_save_cloud_disk, command=treeview_save_cloud_disk.yview)
         treeview_save_cloud_disk.configure(yscrollcommand=vbar_save_cloud_disk.set)
