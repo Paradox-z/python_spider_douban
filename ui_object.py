@@ -627,7 +627,7 @@ class ui_object:
         frame_r_save_cloud_disk.grid(row=0, column=1, sticky=NS)
         frame_root_save_cloud_disk.place(x=5, y=0)
 
-        labelframe_movie_bt_download = LabelFrame(root, width=324, height=230, text="影视下载")
+        labelframe_movie_bt_download = LabelFrame(root, width=324, height=230, text="FilmDownload")
         labelframe_movie_bt_download.place(x=670, y=305)
         self.labelframe_movie_bt_download = labelframe_movie_bt_download
         # Frame
