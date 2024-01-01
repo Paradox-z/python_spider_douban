@@ -11,35 +11,35 @@ import urllib.request
 import urllib.parse
 
 moviedata = ' [' \
-            '{"title":"纪录片", "type":"1", "interval_id":"100:90"}, ' \
-            ' {"title":"传记", "type":"2", "interval_id":"100:90"}, ' \
-            ' {"title":"犯罪", "type":"3", "interval_id":"100:90"}, ' \
-            ' {"title":"历史", "type":"4", "interval_id":"100:90"}, ' \
-            ' {"title":"动作", "type":"5", "interval_id":"100:90"}, ' \
-            ' {"title":"情色", "type":"6", "interval_id":"100:90"}, ' \
-            ' {"title":"歌舞", "type":"7", "interval_id":"100:90"}, ' \
-            ' {"title":"儿童", "type":"8", "interval_id":"100:90"}, ' \
-            ' {"title":"悬疑", "type":"10", "interval_id":"100:90"}, ' \
-            ' {"title":"剧情", "type":"11", "interval_id":"100:90"}, ' \
-            ' {"title":"灾难", "type":"12", "interval_id":"100:90"}, ' \
-            ' {"title":"爱情", "type":"13", "interval_id":"100:90"}, ' \
-            ' {"title":"音乐", "type":"14", "interval_id":"100:90"}, ' \
-            ' {"title":"冒险", "type":"15", "interval_id":"100:90"}, ' \
-            ' {"title":"奇幻", "type":"16", "interval_id":"100:90"}, ' \
-            ' {"title":"科幻", "type":"17", "interval_id":"100:90"}, ' \
-            ' {"title":"运动", "type":"18", "interval_id":"100:90"}, ' \
-            ' {"title":"惊悚", "type":"19", "interval_id":"100:90"}, ' \
-            ' {"title":"恐怖", "type":"20", "interval_id":"100:90"}, ' \
-            ' {"title":"战争", "type":"22", "interval_id":"100:90"}, ' \
-            ' {"title":"短片", "type":"23", "interval_id":"100:90"}, ' \
-            ' {"title":"喜剧", "type":"24", "interval_id":"100:90"}, ' \
-            ' {"title":"动画", "type":"25", "interval_id":"100:90"}, ' \
-            ' {"title":"同性", "type":"26", "interval_id":"100:90"}, ' \
-            ' {"title":"西部", "type":"27", "interval_id":"100:90"}, ' \
-            ' {"title":"家庭", "type":"28", "interval_id":"100:90"}, ' \
-            ' {"title":"武侠", "type":"29", "interval_id":"100:90"}, ' \
-            ' {"title":"古装", "type":"30", "interval_id":"100:90"}, ' \
-            ' {"title":"黑色电影", "type":"31", "interval_id":"100:90"}' \
+            '{"title":"Doc", "type":"1", "interval_id":"100:90"}, ' \
+            ' {"title":"Bio", "type":"2", "interval_id":"100:90"}, ' \
+            ' {"title":"Crim", "type":"3", "interval_id":"100:90"}, ' \
+            ' {"title":"His", "type":"4", "interval_id":"100:90"}, ' \
+            ' {"title":"Act", "type":"5", "interval_id":"100:90"}, ' \
+            ' {"title":"X", "type":"6", "interval_id":"100:90"}, ' \
+            ' {"title":"Danc", "type":"7", "interval_id":"100:90"}, ' \
+            ' {"title":"Kid", "type":"8", "interval_id":"100:90"}, ' \
+            ' {"title":"Mys", "type":"10", "interval_id":"100:90"}, ' \
+            ' {"title":"Dra", "type":"11", "interval_id":"100:90"}, ' \
+            ' {"title":"Disa", "type":"12", "interval_id":"100:90"}, ' \
+            ' {"title":"Rom", "type":"13", "interval_id":"100:90"}, ' \
+            ' {"title":"Musi", "type":"14", "interval_id":"100:90"}, ' \
+            ' {"title":"Adv", "type":"15", "interval_id":"100:90"}, ' \
+            ' {"title":"Fan", "type":"16", "interval_id":"100:90"}, ' \
+            ' {"title":"SciF", "type":"17", "interval_id":"100:90"}, ' \
+            ' {"title":"Spo", "type":"18", "interval_id":"100:90"}, ' \
+            ' {"title":"Thr", "type":"19", "interval_id":"100:90"}, ' \
+            ' {"title":"Hor", "type":"20", "interval_id":"100:90"}, ' \
+            ' {"title":"War", "type":"22", "interval_id":"100:90"}, ' \
+            ' {"title":"Sho", "type":"23", "interval_id":"100:90"}, ' \
+            ' {"title":"Com", "type":"24", "interval_id":"100:90"}, ' \
+            ' {"title":"Ani", "type":"25", "interval_id":"100:90"}, ' \
+            ' {"title":"Homo", "type":"26", "interval_id":"100:90"}, ' \
+            ' {"title":"Wes", "type":"27", "interval_id":"100:90"}, ' \
+            ' {"title":"Fam", "type":"28", "interval_id":"100:90"}, ' \
+            ' {"title":"MA", "type":"29", "interval_id":"100:90"}, ' \
+            ' {"title":"Cos", "type":"30", "interval_id":"100:90"}, ' \
+            ' {"title":"BlkCom", "type":"31", "interval_id":"100:90"}' \
             ']'
 
 def get_url_data_in_ranking_list(typeId, movie_count, rating, vote_count):
