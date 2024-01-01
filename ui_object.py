@@ -638,14 +638,14 @@ class ui_object:
         self.frame_l_bt_download = frame_l_bt_download
         self.frame_r_bt_download = frame_r_bt_download
         # Table
-        columns_bt_download = ("来源名称", "是否有效","播放地址")
+        columns_bt_download = ("SourceName", "VerifiedOrNot","PlayAddress")
         treeview_bt_download = ttk.Treeview(frame_l_bt_download, height=10, show="headings", columns=columns_bt_download)
-        treeview_bt_download.column("来源名称", width=90, anchor='center')
-        treeview_bt_download.column("是否有效", width=80, anchor='center')
-        treeview_bt_download.column("播放地址", width=120, anchor='center')
-        treeview_bt_download.heading("来源名称", text="来源名称")
-        treeview_bt_download.heading("是否有效", text="是否有效")
-        treeview_bt_download.heading("播放地址", text="播放地址")
+        treeview_bt_download.column("SourceName", width=90, anchor='center')
+        treeview_bt_download.column("VerifiedOrNot", width=80, anchor='center')
+        treeview_bt_download.column("PlayAddress", width=120, anchor='center')
+        treeview_bt_download.heading("SourceName", text="SourceName")
+        treeview_bt_download.heading("VerifiedOrNot", text="VerifiedOrNot")
+        treeview_bt_download.heading("PlayAddress", text="PlayAddress")
         # vertical scrollbar
         vbar_bt_download = ttk.Scrollbar(frame_r_bt_download, command=treeview_bt_download.yview)
         treeview_bt_download.configure(yscrollcommand=vbar_bt_download.set)
