@@ -95,7 +95,7 @@ def get_url_data_in_keyword(key_word):
     browser = None
     wait = None
     try:
-        browser = webdriver.Chrome(executable_path='D:/Program Files (x86)/chromedriver.exe', chrome_options=chrome_options)  # set ChromeDriver path
+        browser = webdriver.Chrome(executable_path='D:/Program Files (x86)/chromedriver.exe', chrome_options=chrome_options)  # set ChromeDriver loaded path
         browser.set_page_load_timeout(10)  # webpage loading timeout duration sets 10s
         browser.set_script_timeout(10)  # webpage js loading timeout duration sets 10s
 
@@ -112,7 +112,7 @@ def get_url_data_in_keyword(key_word):
 
         try:
             # browsing papes
-            browser.get('https://movie.douban.com/subject_search?search_text=' + urllib.parse.quote(key_word) + '&cat=1002')  # get methon, to capture return data
+            browser.get('https://movie.douban.com/subject_search?search_text=' + urllib.parse.quote(key_word) + '&cat=1002')  # get jason, to capture for returning data
             # js dynamically rendered web pages
             # waiting class=root element in div
             wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '.root')))
@@ -146,7 +146,7 @@ def get_url_data_in_keyword(key_word):
 
                 vote_element = son.find_elements(by=By.XPATH, value=".//span[@class='pl']")  # get amount
                 if vote_element:
-                    moviedata['vote_count'] = vote_element[0].text.replace('(', '').replace(')', '').replace('人评价', '')
+                    moviedata['vote_count'] = vote_element[0].text.replace('(', '').replace(')', '').replace(' rating quantities', '')
                     sub_list[3] = moviedata['vote_count']
 
                 type_element = son.find_elements(by=By.XPATH, value=".//div[@class='meta abstract']")  # get type element
