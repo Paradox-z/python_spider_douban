@@ -58,7 +58,7 @@ def get_url_data_in_ranking_list(typeId, movie_count, rating, vote_count):
         req = urllib.request.Request(url=url, headers=headers)
         f = urllib.request.urlopen(req, context=context)
         response = f.read()
-        jsondata = loads(response)  # transforming json to Python objects
+        jsondata = loads(response)  # transform json to Python objects
 
         res_list = []
         for subdata in jsondata:  # operating on each film in turn
@@ -86,12 +86,12 @@ def get_url_data_in_keyword(key_word):
     """
 
     chrome_options = Options()
-    chrome_options.add_argument('--headless')  # Setting the headless mode
-    chrome_options.add_argument('user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36"')  # set user=agent
-    chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])  # Setting up Developer Mode
-    chrome_options.add_experimental_option("prefs", {"profile.managed_default_content_settings.images": 2})  # do not load images
+    chrome_options.add_argument('--headless')  # Set as headless mode
+    chrome_options.add_argument('user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36"')  # set user status as agent
+    chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])  # Set as developer mode
+    chrome_options.add_experimental_option("prefs", {"profile.managed_default_content_settings.images": 2})  # avoid loading images temporarily
 
-    load_driver_success = False  # Loading ChromeDriver
+    load_driver_success = False  # loading chromedriver
     browser = None
     wait = None
     try:
