@@ -34,6 +34,7 @@ import ssl
 ssl._create_default_https_context = ssl._create_unverified_context # SSL blocked
 
 # Maybe we should do UI frame design with PyQT, that's the solution for enterprise testing and development.
+# Python API application, processing...Py-ML platform
 
 def thread_it(func, *args):
     '''
